@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap');
 
+/* Base Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #000;
+  background: #000;
   color: #333;
   display: flex;
   justify-content: center;
@@ -16,6 +17,7 @@ body {
   padding: 40px 20px;
   min-height: 100vh;
   text-align: center;
+  position: relative;
 }
 
 .container {
@@ -24,48 +26,17 @@ body {
   background: #fff;
   border-radius: 20px;
   padding: 30px;
-  z-index: 10;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
   position: relative;
+  z-index: 10;
 }
 
-h1, h2 {
+h1 {
   font-family: 'Playfair Display', serif;
-}
-
-#rotating-title {
   font-size: 1.6rem;
   color: #d6336c;
-  min-height: 90px;
   margin-bottom: 20px;
-  transition: opacity 0.5s ease;
-}
-
-.cake-wrapper {
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.cake {
-  width: 120px;
-}
-
-.flame {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 22px;
-  background: radial-gradient(ellipse at center, #fff176 0%, #ff9800 60%, transparent 100%);
-  border-radius: 50%;
-  animation: flicker 1s infinite ease-in-out;
-  box-shadow: 0 0 15px #ffb74d, 0 0 25px #ff9800, 0 0 35px #ff5722;
-}
-
-@keyframes flicker {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.1); }
+  min-height: 60px;
 }
 
 #countdown {
@@ -98,26 +69,39 @@ h1, h2 {
   color: #6c757d;
 }
 
-#birthday-message {
-  margin-top: 20px;
+.cake-wrapper {
+  margin-bottom: 20px;
+  position: relative;
 }
 
-#birthday-message h2 {
-  color: #c2185b;
-  margin-bottom: 10px;
+.cake {
+  width: 120px;
 }
 
-#birthday-message p {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.5;
-  margin-bottom: 10px;
+.flame {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 22px;
+  background: radial-gradient(ellipse at center, #fff176 0%, #ff9800 60%, transparent 100%);
+  border-radius: 50%;
+  animation: flicker 1s infinite ease-in-out;
+  box-shadow: 0 0 15px #ffb74d, 0 0 25px #ff9800, 0 0 35px #ff5722;
+}
+
+@keyframes flicker {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
 }
 
 .gift-heading {
+  font-family: 'Playfair Display', serif;
   font-size: 1.2rem;
   color: #c2185b;
-  margin: 20px 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
   text-shadow: 0 0 10px #ff80ab, 0 0 20px #f06292;
   animation: glowPulse 2s ease-in-out infinite;
   cursor: pointer;
@@ -177,7 +161,7 @@ h1, h2 {
   height: 14px;
   border-radius: 50%;
   background: #d6336c;
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 #current-time,
@@ -233,7 +217,7 @@ h1, h2 {
 }
 
 #error-message,
-#unlock-error {
+#phrase-error {
   color: red;
   font-size: 0.9rem;
   margin-top: 10px;
@@ -248,16 +232,36 @@ h1, h2 {
   color: #333;
 }
 
+/* Birthday Message Styling */
+.birthday-message {
+  text-align: left;
+  padding-top: 10px;
+}
+
+.birthday-message p {
+  margin: 12px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.birthday-message strong {
+  color: #d6336c;
+}
+
 /* Responsive */
-@media (max-width: 500px) {
-  .container {
-    padding: 20px;
+@media (max-width: 600px) {
+  #countdown {
+    gap: 8px;
   }
   #countdown div {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
   }
-  #rotating-title, .gift-heading {
-    font-size: 1.2rem;
+  #countdown span {
+    font-size: 1.1rem;
+  }
+  #rotating-title {
+    font-size: 1.4rem;
   }
 }
