@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap');
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -11,79 +10,36 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #000;
   color: #333;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-  min-height: 100vh;
   text-align: center;
-  position: relative;
 }
 
 .container {
-  max-width: 800px;
-  width: 100%;
   background: #fff;
   border-radius: 20px;
   padding: 30px;
-  position: relative;
-  z-index: 10;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
-/* Welcome Screen */
-#welcome-screen {
-  position: fixed;
-  inset: 0;
-  background-color: #000;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  text-align: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.welcome-message {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  color: #fff0f3;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 30px 35px;
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(255, 77, 109, 0.3);
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
-  line-height: 1.6;
-  animation: fadeInUp 1s ease both;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  position: relative;
 }
 
-.welcome-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+h1,
+h2 {
+  font-family: 'Playfair Display', serif;
 }
 
 #rotating-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   color: #d6336c;
-  min-height: 90px;
   margin-bottom: 20px;
-  transition: opacity 0.5s ease;
+  min-height: 60px;
+  transition: opacity 0.4s ease;
 }
 
 .cake-wrapper {
@@ -117,7 +73,8 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
 #countdown div {
@@ -133,7 +90,7 @@ body {
 }
 
 #countdown span {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #ff4d6d;
 }
@@ -144,7 +101,6 @@ body {
 }
 
 .gift-heading {
-  font-family: 'Playfair Display', serif;
   font-size: 1.2rem;
   color: #c2185b;
   margin-top: 10px;
@@ -160,20 +116,28 @@ body {
   100% { text-shadow: 0 0 5px #f48fb1, 0 0 10px #f06292; }
 }
 
+/* Birthday Message Section */
 #birthday-message {
-  display: none;
-  margin-top: 20px;
-  background: #fff8f0;
-  border-left: 5px solid #ff4d6d;
-  padding: 20px;
-  font-size: 1rem;
-  font-family: 'Playfair Display', serif;
-  white-space: pre-line;
-  border-radius: 10px;
+  text-align: left;
+  margin-top: 25px;
 }
 
-#birthday-message:not(.hidden) {
-  display: block;
+#birthday-message h1 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #c2185b;
+  margin-bottom: 20px;
+}
+
+.birthday-wish p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.birthday-wish p strong {
+  color: #d6336c;
 }
 
 /* Audio Player */
@@ -200,10 +164,6 @@ body {
   margin-bottom: 20px;
 }
 
-.play-btn:active {
-  box-shadow: inset 2px 2px 5px #f1c9d9, inset -2px -2px 5px #fff;
-}
-
 .progress-container {
   display: flex;
   align-items: center;
@@ -228,7 +188,8 @@ body {
   cursor: not-allowed;
 }
 
-#current-time, #duration {
+#current-time,
+#duration {
   font-size: 14px;
   color: #c2185b;
 }
@@ -267,7 +228,9 @@ body {
   cursor: pointer;
 }
 
-.popup .close-btn {
+.popup #close-popup,
+.popup #close-password-popup,
+.popup #close-gift-unlock-popup {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -277,14 +240,10 @@ body {
 }
 
 #error-message,
-#final-error-message {
+#gift-error-message {
   color: red;
   font-size: 0.9rem;
   margin-top: 10px;
-}
-
-.hidden {
-  display: none !important;
 }
 
 #phrase-display {
@@ -296,19 +255,31 @@ body {
   color: #333;
 }
 
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
-  #countdown {
-    gap: 5px;
-  }
   #countdown div {
     width: 50px;
     height: 50px;
   }
-  #countdown span {
+
+  #rotating-title {
+    font-size: 1.3rem;
+  }
+
+  .gift-heading {
     font-size: 1rem;
   }
-  #countdown small {
-    font-size: 0.6rem;
+
+  .birthday-wish p {
+    font-size: 0.95rem;
+  }
+
+  #birthday-message h1 {
+    font-size: 1.5rem;
   }
 }

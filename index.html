@@ -9,16 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Welcome Screen -->
+  <!-- Welcome Overlay -->
   <div id="welcome-screen">
     <div id="welcome-message" class="welcome-message"></div>
   </div>
 
-  <!-- Main Container -->
   <div class="container">
+    <!-- Rotating or Static Title -->
     <h1 id="rotating-title">Hey love, something special is coming…</h1>
 
-    <!-- Cake -->
+    <!-- Cake Illustration -->
     <div class="cake-wrapper">
       <img src="cake.png" alt="Birthday Cake" class="cake" />
       <div class="flame"></div>
@@ -32,27 +32,23 @@
       <div><span id="seconds">00</span><small>Seconds</small></div>
     </div>
 
-    <!-- Birthday Message (hidden until 12AM May 31) -->
-    <div id="birthday-message" class="hidden">
-      <p>
-        <strong>Happy Birthday, Oluwakemi.</strong><br><br>
-        From the moment Allah destined our paths to cross, I knew you were special.
-        Today, I raise my hands in du’a that Allah (SWT) showers you with joy, barakah, and endless serenity.<br><br>
-        You are not just my peace — you are my purpose.
-        I pray you're always surrounded by people who uplift your soul and remind you of your worth.<br><br>
-        May He ease your worries, fill your heart with sakinah (tranquility), and write beautiful stories for you this new year.<br><br>
-        I love you more than words can hold.<br>
-        More than code can express.<br>
-        More than promises can declare.<br><br>
-        With you, I've learned patience, gratitude, and what it truly means to care deeply.<br><br>
-        Never doubt how much I believe in you. You’re destined for greatness.<br><br>
-        <strong>Barakallahu fii umrik, my love.</strong><br>
-        May this year be your softest, strongest, and most beautiful yet.
-      </p>
-    </div>
-
-    <!-- Gift Unwrap Heading -->
+    <!-- Gift Reveal Title -->
     <h2 id="gift-heading" class="gift-heading">Click here to unwrap your gift, my love</h2>
+
+    <!-- Birthday Message (Replaces Countdown after 12AM on May 31) -->
+    <div id="birthday-message" class="hidden">
+      <h1>The moment is here, my love.</h1>
+      <div class="birthday-wish">
+        <p>Happy Birthday, Oluwakemi.</p>
+        <p>From the moment Allah destined our paths to cross, I knew you were special. Today, I raise my hands in du’a that Allah (SWT) showers you with joy, barakah, and endless serenity.</p>
+        <p>You are not just my peace — you are my purpose. I pray you're always surrounded by people who uplift your soul and remind you of your worth.</p>
+        <p>May He ease your worries, fill your heart with sakinah (tranquility), and write beautiful stories for you this new year.</p>
+        <p>I love you more than words can hold. More than code can express. More than promises can declare.</p>
+        <p>With you, I've learned patience, gratitude, and what it truly means to care deeply.</p>
+        <p>Never doubt how much I believe in you. You’re destined for greatness.</p>
+        <p><strong>Barakallahu fii umrik, my love.</strong> May this year be your softest, strongest, and most beautiful yet.</p>
+      </div>
+    </div>
 
     <!-- Audio Player -->
     <div class="simple-audio-player" id="audio-player">
@@ -67,19 +63,10 @@
       <audio id="audio" preload="auto" type="audio/mp3"></audio>
     </div>
 
-    <!-- Daily Phrase Reveal Section -->
+    <!-- Phrase Unlock Display -->
     <div id="phrase-display" class="hidden">
       <h3 id="phrase-text">Your phrase will appear here</h3>
     </div>
-  </div>
-
-  <!-- Daily Password Popup -->
-  <div id="password-popup" class="popup hidden">
-    <span id="close-password-popup">&times;</span>
-    <h3>Enter password to unlock today's phrase</h3>
-    <input type="password" id="password-input" placeholder="Enter your password to get today's phrase babygirl" />
-    <button id="submit-password">Unlock</button>
-    <div id="error-message" class="hidden"></div>
   </div>
 
   <!-- Gift Popup -->
@@ -88,16 +75,24 @@
     <p id="popup-text">Surprise message here</p>
   </div>
 
-  <!-- Final Gift Access (After 12PM on May 31) -->
-  <div id="final-gift-popup" class="popup hidden">
-    <span id="close-final-popup">&times;</span>
-    <h3>Enter your 10-word phrase to unlock your gift</h3>
-    <input type="text" id="full-phrase-input" placeholder="Type your full phrase here..." />
-    <button id="submit-full-phrase">Unlock Gift</button>
-    <div id="final-error-message" class="hidden"></div>
+  <!-- Password Phrase Popup -->
+  <div id="password-popup" class="popup hidden">
+    <span id="close-password-popup">&times;</span>
+    <h3>Enter password to unlock today's phrase</h3>
+    <input type="password" id="password-input" placeholder="Enter your password to get today's phrase babygirl" />
+    <button id="submit-password">Unlock</button>
+    <div id="error-message" class="hidden"></div>
+  </div>
+
+  <!-- 10-Phrase Gift Unlock Popup (Visible only at 9AM May 31) -->
+  <div id="gift-unlock-popup" class="popup hidden">
+    <span id="close-gift-unlock-popup">&times;</span>
+    <h3>Enter the 10-word phrase to unwrap your gift</h3>
+    <input type="text" id="gift-unlock-input" placeholder="Enter your full phrase here" />
+    <button id="submit-gift-unlock">Unlock Gift</button>
+    <div id="gift-error-message" class="hidden"></div>
   </div>
 
   <script src="script.js"></script>
-  <script src="welcome.js"></script>
 </body>
 </html>

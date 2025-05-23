@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // === Welcome Screen ===
+  // ========== Welcome Screen ==========
   const welcomeMessages = [
     "System status: Waiting for Oluwakemi’s birthday...\nProgrammed with love, patience, and a little surprise.",
     "Before anything else, just know, this page is love in digital form.\nCount it down with me.",
@@ -14,43 +14,53 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
   const welcomeScreen = document.getElementById("welcome-screen");
   const welcomeMessage = document.getElementById("welcome-message");
-  const selectedWelcome = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
-  welcomeMessage.textContent = selectedWelcome;
-  setTimeout(() => {
-    welcomeScreen.classList.add("welcome-hidden");
-  }, 8000);
+  const randomMsg = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+  if (welcomeScreen) {
+    welcomeMessage.textContent = randomMsg;
+    setTimeout(() => {
+      welcomeScreen.style.opacity = 0;
+      setTimeout(() => {
+        welcomeScreen.style.display = "none";
+      }, 500);
+    }, 8000);
+  }
 
-  // === Countdown ===
-  const targetDate = new Date("2025-05-31T00:00:00+01:00").getTime();
-  const countdownEl = document.getElementById("countdown");
-  const birthdayMessage = document.getElementById("birthday-message");
-  const audioPlayer = document.getElementById("audio-player");
+  // ========== Core Elements ==========
+  const now = new Date();
+  const isMay31 = now.getMonth() === 4 && now.getDate() === 31;
+  const currentHour = now.getHours();
+
+  const countdown = document.getElementById("countdown");
   const rotatingTitle = document.getElementById("rotating-title");
+  const birthdayMessage = document.getElementById("birthday-message");
+  const audioPlayer = document.querySelector(".simple-audio-player");
 
-  function updateCountdown() {
+  // ========== Show Birthday Wishes ==========
+  if (isMay31 && currentHour >= 0) {
+    if (countdown) countdown.classList.add("hidden");
+    if (rotatingTitle) rotatingTitle.textContent = "The moment is here, my love.";
+    if (birthdayMessage) birthdayMessage.classList.remove("hidden");
+    if (audioPlayer) audioPlayer.classList.add("hidden");
+  }
+
+  // ========== Countdown Timer ==========
+  const targetDate = new Date("2025-05-31T00:00:00+01:00").getTime();
+  setInterval(() => {
     const now = new Date().getTime();
     const diff = targetDate - now;
-
-    if (now >= targetDate) {
-      countdownEl.style.display = "none";
-      rotatingTitle.textContent = "The moment is here, my love.";
-      birthdayMessage.classList.remove("hidden");
-      if (audioPlayer) audioPlayer.style.display = "none";
-    } else {
-      const d = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
-      const h = Math.max(0, Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-      const m = Math.max(0, Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
-      const s = Math.max(0, Math.floor((diff % (1000 * 60)) / 1000));
+    const d = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+    const h = Math.max(0, Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+    const m = Math.max(0, Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
+    const s = Math.max(0, Math.floor((diff % (1000 * 60)) / 1000));
+    if (!isMay31) {
       document.getElementById("days").textContent = String(d).padStart(2, "0");
       document.getElementById("hours").textContent = String(h).padStart(2, "0");
       document.getElementById("minutes").textContent = String(m).padStart(2, "0");
       document.getElementById("seconds").textContent = String(s).padStart(2, "0");
     }
-  }
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
+  }, 1000);
 
-  // === Rotating Title ===
+  // ========== Rotating Titles ==========
   const messages = [
     "Something beautiful is brewing for the one who makes me smile.",
     "My woman, my everything, your surprise is almost ready.",
@@ -68,16 +78,18 @@ document.addEventListener("DOMContentLoaded", function () {
     "This one no be ordinary, na love coded in a moment."
   ];
   let msgIndex = 0;
-  setInterval(() => {
-    rotatingTitle.style.opacity = 0;
-    setTimeout(() => {
-      rotatingTitle.textContent = messages[msgIndex];
-      rotatingTitle.style.opacity = 1;
-      msgIndex = (msgIndex + 1) % messages.length;
-    }, 300);
-  }, 5000);
+  if (!isMay31) {
+    setInterval(() => {
+      rotatingTitle.style.opacity = 0;
+      setTimeout(() => {
+        rotatingTitle.textContent = messages[msgIndex];
+        rotatingTitle.style.opacity = 1;
+        msgIndex = (msgIndex + 1) % messages.length;
+      }, 300);
+    }, 5000);
+  }
 
-  // === Audio ===
+  // ========== Random Music on Every Load ==========
   const audio = document.getElementById("audio");
   const playBtn = document.getElementById("play-button");
   const playIcon = document.getElementById("play-icon");
@@ -85,10 +97,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentTimeEl = document.getElementById("current-time");
   const durationEl = document.getElementById("duration");
 
-  const randomLetter = "abcdefghijklmnopqrstuvwxyz".split("").sort(() => 0.5 - Math.random())[0];
-  audio.src = `audio/${randomLetter}.mp3`;
+  if (!isMay31) {
+    const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+    const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+    audio.src = `audio/${randomLetter}.mp3`;
+  }
 
   let isPlaying = false;
+
   playBtn.addEventListener("click", () => {
     isPlaying ? audio.pause() : audio.play();
   });
@@ -110,96 +126,97 @@ document.addEventListener("DOMContentLoaded", function () {
     durationEl.textContent = formatTime(audio.duration);
   });
 
-  progress.addEventListener("mousedown", e => e.preventDefault());
-
   function formatTime(seconds) {
     const min = Math.floor(seconds / 60);
     const sec = Math.floor(seconds % 60).toString().padStart(2, "0");
     return `${min}:${sec}`;
   }
 
-  audio.addEventListener("ended", () => {
-    isPlaying = false;
-    playIcon.innerHTML = "&#9658;";
-    document.getElementById("password-popup").classList.remove("hidden");
-  });
+  progress.addEventListener("mousedown", e => e.preventDefault());
 
-  // === Gift Unwrapping ===
+  // ========== Unlock Gift on May 31 at 9AM ==========
   const giftHeading = document.getElementById("gift-heading");
-  const giftPopup = document.getElementById("gift-popup");
-  const finalGiftPopup = document.getElementById("final-gift-popup");
-  const popupText = document.getElementById("popup-text");
-  const now = new Date();
-  const giftLines = [
-    "A queen like you deserves to wait for a royal reveal. Patience, my love.",
-    "Hmm… you too dey rush. Let’s unwrap it together on the 31st.",
-    "Chill babygirl… we still dey cook your surprise. Come back on the 31st."
-  ];
-  let popupIndex = 0;
+  const giftPopup = document.getElementById("gift-unlock-popup");
+  const unlockBtn = document.getElementById("unlock-gift");
+  const giftInput = document.getElementById("gift-phrase-input");
+  const giftError = document.getElementById("gift-error-message");
+  const closeGiftPopup = document.getElementById("close-gift-unlock-popup");
+
+  const correctPhrase = "oluwakemi loving you brings me peace joy strength and purpose";
 
   giftHeading.addEventListener("click", () => {
-    const today = new Date();
-    const day = today.getDate();
-    const hour = today.getHours();
-
-    if (day === 31 && hour >= 12) {
-      finalGiftPopup.classList.remove("hidden");
-    } else if (day === 31 && hour < 12) {
-      popupText.textContent = "Come back by 12pm to claim your gift my love.";
+    if (isMay31 && currentHour >= 9) {
       giftPopup.classList.remove("hidden");
-      setTimeout(() => giftPopup.classList.add("hidden"), 5000);
+      giftInput.value = "";
+      giftError.classList.add("hidden");
+    } else if (isMay31) {
+      const giftPopupText = document.getElementById("popup-text");
+      giftPopupText.textContent = "Come back by 9am to claim your gift my love.";
+      document.getElementById("gift-popup").classList.remove("hidden");
+      setTimeout(() => document.getElementById("gift-popup").classList.add("hidden"), 5000);
     } else {
-      popupText.textContent = giftLines[popupIndex % giftLines.length];
-      popupIndex++;
-      giftPopup.classList.remove("hidden");
-      setTimeout(() => giftPopup.classList.add("hidden"), 5000);
+      const giftLines = [
+        "A queen like you deserves to wait for a royal reveal. Patience, my love.",
+        "Hmm… you too dey rush. Let’s unwrap it together on the 31st.",
+        "Chill babygirl… we still dey cook your surprise. Come back on the 31st."
+      ];
+      const giftPopupText = document.getElementById("popup-text");
+      giftPopupText.textContent = giftLines[Math.floor(Math.random() * giftLines.length)];
+      document.getElementById("gift-popup").classList.remove("hidden");
+      setTimeout(() => document.getElementById("gift-popup").classList.add("hidden"), 5000);
     }
   });
 
-  document.getElementById("close-popup").addEventListener("click", () => {
-    giftPopup.classList.add("hidden");
-  });
-
-  document.getElementById("close-final-popup").addEventListener("click", () => {
-    finalGiftPopup.classList.add("hidden");
-  });
-
-  document.getElementById("submit-full-phrase").addEventListener("click", () => {
-    const input = document.getElementById("full-phrase-input").value.trim();
-    const correctPhrase = "Oluwakemi Loving You Brings Me Peace Joy Strength And Purpose";
-    const error = document.getElementById("final-error-message");
-
+  unlockBtn.addEventListener("click", () => {
+    const input = giftInput.value.trim().toLowerCase();
     if (input === correctPhrase) {
       window.location.href = "gift.html";
     } else {
-      error.textContent = "Incorrect phrase my love. Try again carefully.";
-      error.classList.remove("hidden");
+      giftError.textContent = "You entered the wrong phrase, my love.";
+      giftError.classList.remove("hidden");
     }
   });
 
-  // === Phrase Reveal Password Popup ===
-  document.getElementById("submit-password").addEventListener("click", () => {
-    const input = document.getElementById("password-input").value.trim();
-    const phraseDates = [12, 14, 16, 17, 19, 20, 21, 23, 24, 29];
-    const phrases = ["Oluwakemi", "Loving", "You", "Brings", "Me", "Peace", "Joy", "Strength", "And", "Purpose"];
-    const currentDay = new Date().getDate();
-    const errorMsg = document.getElementById("error-message");
+  closeGiftPopup.addEventListener("click", () => {
+    giftPopup.classList.add("hidden");
+  });
 
-    if (input === "TrustMeBabe") {
+  document.getElementById("close-popup").addEventListener("click", () => {
+    document.getElementById("gift-popup").classList.add("hidden");
+  });
+
+  // ========== Password Phrase Unlock ==========
+  const passwordPopup = document.getElementById("password-popup");
+  const passwordInput = document.getElementById("password-input");
+  const submitBtn = document.getElementById("submit-password");
+  const errorMsg = document.getElementById("error-message");
+  const closePasswordPopup = document.getElementById("close-password-popup");
+
+  const phraseDisplay = document.getElementById("phrase-display");
+  const phraseText = document.getElementById("phrase-text");
+
+  const PASSWORD = "TrustMeBabe";
+  const phraseDates = [12, 14, 16, 17, 19, 20, 21, 23, 24, 29];
+  const phrases = ["Oluwakemi", "Loving", "You", "Brings", "Me", "Peace", "Joy", "Strength", "And", "Purpose"];
+  const currentDay = new Date().getDate();
+
+  submitBtn.addEventListener("click", () => {
+    const input = passwordInput.value.trim();
+    if (input === PASSWORD) {
       if (phraseDates.includes(currentDay)) {
-        document.getElementById("phrase-text").textContent = phrases[phraseDates.indexOf(currentDay)];
+        phraseText.textContent = phrases[phraseDates.indexOf(currentDay)];
       } else {
-        document.getElementById("phrase-text").textContent = "Sorry my love, no phrase today. Check back tomorrow.";
+        phraseText.textContent = "Sorry my love, no phrase today. Check back tomorrow.";
       }
-      document.getElementById("password-popup").classList.add("hidden");
-      document.getElementById("phrase-display").classList.remove("hidden");
+      passwordPopup.classList.add("hidden");
+      phraseDisplay.classList.remove("hidden");
     } else {
       errorMsg.textContent = "You entered the wrong password my love.";
       errorMsg.classList.remove("hidden");
     }
   });
 
-  document.getElementById("close-password-popup").addEventListener("click", () => {
-    document.getElementById("password-popup").classList.add("hidden");
+  closePasswordPopup.addEventListener("click", () => {
+    passwordPopup.classList.add("hidden");
   });
 });
