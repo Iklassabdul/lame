@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Birthday Surprise</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="welcome.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <!-- Welcome Screen -->
@@ -14,16 +14,17 @@
     <div id="welcome-message" class="welcome-message"></div>
   </div>
 
-  <!-- Main Page Content -->
   <div class="container">
+    <!-- Title -->
     <h1 id="rotating-title">Hey love, something special is coming…</h1>
 
+    <!-- Cake Image -->
     <div class="cake-wrapper">
       <img src="cake.png" alt="Birthday Cake" class="cake" />
       <div class="flame"></div>
     </div>
 
-    <!-- Countdown Timer -->
+    <!-- Countdown -->
     <div id="countdown">
       <div><span id="days">00</span><small>Days</small></div>
       <div><span id="hours">00</span><small>Hours</small></div>
@@ -31,10 +32,9 @@
       <div><span id="seconds">00</span><small>Seconds</small></div>
     </div>
 
-    <!-- Replaces countdown after May 31 at 12AM -->
+    <!-- Birthday Message -->
     <div id="birthday-message" class="hidden">
-      <h1>The moment is here, my love.</h1>
-      <div class="birthday-message modern">
+      <div class="birthday-card">
         <p><strong>Happy Birthday, Oluwakemi.</strong></p>
         <p>From the moment Allah destined our paths to cross, I knew you were special. Today, I raise my hands in du’a that Allah (SWT) showers you with joy, barakah, and endless serenity.</p>
         <p>You are not just my peace, you are my purpose. I pray you're always surrounded by people who uplift your soul and remind you of your worth.</p>
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <!-- Gift and Journal Access -->
+    <!-- Gift Heading -->
     <h2 id="gift-heading" class="gift-heading">Click here to unwrap your gift, my love</h2>
 
     <!-- Audio Player -->
@@ -62,18 +62,19 @@
       <audio id="audio" preload="auto" type="audio/mp3"></audio>
     </div>
 
-    <!-- Phrase Result Display -->
+    <!-- Phrase Display -->
     <div id="phrase-display" class="hidden">
       <h3 id="phrase-text">Your phrase will appear here</h3>
     </div>
   </div>
 
-  <!-- Popups -->
+  <!-- Gift Popup -->
   <div id="gift-popup" class="popup hidden">
     <span id="close-popup">&times;</span>
     <p id="popup-text">Surprise message here</p>
   </div>
 
+  <!-- Password Popup -->
   <div id="password-popup" class="popup hidden">
     <span id="close-password-popup">&times;</span>
     <h3>Enter password to unlock today's phrase</h3>
@@ -82,13 +83,13 @@
     <div id="error-message" class="hidden"></div>
   </div>
 
-  <!-- Gift Phrase Unlock at 9AM -->
-  <div id="gift-unlock-popup" class="popup hidden">
-    <span id="close-gift-unlock-popup">&times;</span>
-    <h3>Enter the 10-word phrase to unlock your gift my love</h3>
-    <input type="text" id="phrase-input" placeholder="Type the full phrase here..." />
-    <button id="submit-phrase">Submit</button>
-    <div id="phrase-error" class="hidden"></div>
+  <!-- Phrase Unlock Popup for Gift -->
+  <div id="phrase-unlock-popup" class="popup hidden">
+    <span id="close-phrase-unlock">&times;</span>
+    <h3>Enter the full 10-word phrase to unlock your gift</h3>
+    <input type="text" id="full-phrase-input" placeholder="Type all 10 words in one line"/>
+    <button id="submit-full-phrase">Submit</button>
+    <div id="full-phrase-error" class="hidden"></div>
   </div>
 
   <script src="script.js"></script>
