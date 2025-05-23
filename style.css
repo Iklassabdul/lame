@@ -1,45 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap');
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #000;
   color: #333;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
+  min-height: 100vh;
   text-align: center;
 }
 
 .container {
+  max-width: 800px;
+  width: 100%;
   background: #fff;
   border-radius: 20px;
   padding: 30px;
-  max-width: 800px;
-  width: 100%;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 10;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: 'Playfair Display', serif;
 }
 
 #rotating-title {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   color: #d6336c;
+  min-height: 90px;
   margin-bottom: 20px;
-  min-height: 60px;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
 }
 
 .cake-wrapper {
@@ -73,8 +72,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 #countdown div {
@@ -90,7 +88,7 @@ h2 {
 }
 
 #countdown span {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #ff4d6d;
 }
@@ -100,11 +98,26 @@ h2 {
   color: #6c757d;
 }
 
+#birthday-message {
+  margin-top: 20px;
+}
+
+#birthday-message h2 {
+  color: #c2185b;
+  margin-bottom: 10px;
+}
+
+#birthday-message p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
 .gift-heading {
   font-size: 1.2rem;
   color: #c2185b;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   text-shadow: 0 0 10px #ff80ab, 0 0 20px #f06292;
   animation: glowPulse 2s ease-in-out infinite;
   cursor: pointer;
@@ -116,31 +129,6 @@ h2 {
   100% { text-shadow: 0 0 5px #f48fb1, 0 0 10px #f06292; }
 }
 
-/* Birthday Message Section */
-#birthday-message {
-  text-align: left;
-  margin-top: 25px;
-}
-
-#birthday-message h1 {
-  font-size: 1.8rem;
-  text-align: center;
-  color: #c2185b;
-  margin-bottom: 20px;
-}
-
-.birthday-wish p {
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
-
-.birthday-wish p strong {
-  color: #d6336c;
-}
-
-/* Audio Player */
 .simple-audio-player {
   background: #ffeaf2;
   border-radius: 20px;
@@ -164,6 +152,10 @@ h2 {
   margin-bottom: 20px;
 }
 
+.play-btn:active {
+  box-shadow: inset 2px 2px 5px #f1c9d9, inset -2px -2px 5px #fff;
+}
+
 .progress-container {
   display: flex;
   align-items: center;
@@ -185,7 +177,7 @@ h2 {
   height: 14px;
   border-radius: 50%;
   background: #d6336c;
-  cursor: not-allowed;
+  cursor: pointer;
 }
 
 #current-time,
@@ -194,7 +186,6 @@ h2 {
   color: #c2185b;
 }
 
-/* Popups */
 .popup {
   position: fixed;
   top: 50%;
@@ -228,9 +219,7 @@ h2 {
   cursor: pointer;
 }
 
-.popup #close-popup,
-.popup #close-password-popup,
-.popup #close-gift-unlock-popup {
+.popup span {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -239,8 +228,12 @@ h2 {
   color: #888;
 }
 
+.hidden {
+  display: none !important;
+}
+
 #error-message,
-#gift-error-message {
+#unlock-error {
   color: red;
   font-size: 0.9rem;
   margin-top: 10px;
@@ -255,31 +248,16 @@ h2 {
   color: #333;
 }
 
-/* Utility */
-.hidden {
-  display: none !important;
-}
-
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+  }
   #countdown div {
     width: 50px;
     height: 50px;
   }
-
-  #rotating-title {
-    font-size: 1.3rem;
-  }
-
-  .gift-heading {
-    font-size: 1rem;
-  }
-
-  .birthday-wish p {
-    font-size: 0.95rem;
-  }
-
-  #birthday-message h1 {
-    font-size: 1.5rem;
+  #rotating-title, .gift-heading {
+    font-size: 1.2rem;
   }
 }
